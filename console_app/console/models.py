@@ -15,16 +15,11 @@ class Console(db.Model):
         self.active = active
 
     def selfUpdateFromArgs(self, args):
-        self.id = args[id] if (self.id == None and 'id' in args) else self.id
+        self.id = args['id'] if ('id' in args and args['id'] != None) else None
         self.name = args['name']
         self.year = args['year']
         self.price = args['price']
         self.active = args['active']
-        self.total_de_abatimentos = args['total_de_abatimentos']
-        self.total_de_assistencias = args['total_de_assistencias']
-        self.total_de_mortes = args['total_de_mortes']
-        self.total_de_partidas_jogadas = args['total_de_partidas_jogadas']
-        self.total_de_vitorias = args['total_de_vitorias']
     
     def toJson(self):
         return {

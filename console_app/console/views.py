@@ -38,6 +38,11 @@ class ConsoleApi(Resource):
         args = parser.parse_args()
 
         console = Console()
+
+        print('\n\n\n\n\n')
+        print(args)
+        print('\n\n\n\n\n')
+
         console.selfUpdateFromArgs(args)
 
         db.session.add(console)
