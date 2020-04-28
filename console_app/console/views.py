@@ -11,7 +11,7 @@ parser.add_argument('name',type=str)
 parser.add_argument('year',type=int)
 parser.add_argument('price',type=float)
 parser.add_argument('active', type = bool)
-
+parser.add_argument('amount_games', type = int)
 
 @console.route("/")
 @console.route("/home")
@@ -23,7 +23,8 @@ class ConsoleApi(Resource):
         if id == None:
             consoles = Console.query.paginate(page, 5).items
         else:
-            consoles = [Console.query.get(id)]
+            console = Console.query.get(id)
+            return jsonify(console.toJson())
         
         if len(consoles) == 0 or consoles[0] == None:
             return jsonify({})
@@ -38,10 +39,6 @@ class ConsoleApi(Resource):
         args = parser.parse_args()
 
         console = Console()
-
-        print('\n\n\n\n\n')
-        print(args)
-        print('\n\n\n\n\n')
 
         console.selfUpdateFromArgs(args)
 
